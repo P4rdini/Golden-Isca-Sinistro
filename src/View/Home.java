@@ -2464,7 +2464,6 @@ public class Home extends javax.swing.JFrame {
                         agente.setNome(tfNomeAgente.getText());
                         agente.setPlaca(tfPlacaAgente.getText());
                         agente.setReside(tfReside.getText());
-                        agente.setTotalKM(Integer.valueOf(tfTotalKM.getText()));
                         agente.setVarredura(tfVarredura.getText());
                         sinistro.setInformante(tfInformante.getText());
                         sinistro.setModelo(tfModelo.getText());
@@ -2472,8 +2471,24 @@ public class Home extends javax.swing.JFrame {
                         sinistro.setPlaca(tfPlaca.getText());
                         sinistro.setTipoAcionamento(cbTipoAcionamento.getSelectedItem().toString());
                         sinistro.setTipoOcorrencia(cbTipoOcorrencia.getSelectedItem().toString());
+                        if(tfTotalKM.getText().isEmpty()){
+                            agente.setTotalKM(0);
+                        }else{
+                            agente.setTotalKM(Integer.valueOf(tfTotalKM.getText()));
+                        }
+                        
+                        if(tfValorCarga.getText().isEmpty()){
+                            sinistro.setValorCarga(0);
+                        }else{
                         sinistro.setValorCarga(Double.valueOf(tfValorCarga.getText().toString()));
+                            
+                        }
+                        if(tfIsca.getText().isEmpty()){
+                            sinistro.setIsca(0);
+                        }else{
+                            
                         sinistro.setIsca(Integer.valueOf(tfIsca.getText()));
+                        }
                         sinistro.setAgente(agente);
                         if (sinistro.Gravar(sinistro)) {
                                 JOptionPane.showMessageDialog(null, "Dados Salvo com Sucesso");
