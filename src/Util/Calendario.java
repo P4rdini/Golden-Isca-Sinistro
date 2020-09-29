@@ -16,12 +16,17 @@ import javax.swing.SpinnerListModel;
  *
  * @author rafa_
  */
+//* Classe calendario que retorna o dia mes e ano selecionado  */
 public class Calendario extends javax.swing.JFrame {
-
+    /* instanciamos um objeto do tipo Calendar para manipularmos as datas */
     private Calendar data = Calendar.getInstance();
+    /* criamos um lista de labels onde cada uma corresponde a um dia da semana da nossa tela*/
     ArrayList<JLabel> ListaLb = new ArrayList<JLabel>();
+    
     ArrayList<Boolean> ListaVerificacao = new ArrayList<Boolean>();
+    /* pegamos o mes atual atravez da funcao get da classe Calendar*/
     private Integer Mes = data.get(Calendar.MONTH);
+    /* Aqui criamos uma variavel para cada mes do ano , com o valor de todas de dias daquele mes */
     private int janeiro = 31;
     private int fevereiro = 29;
     private int marco = 31;
@@ -35,22 +40,53 @@ public class Calendario extends javax.swing.JFrame {
     private int novembro = 30;
     private int dezembro = 31;
     private boolean v1 = true;
+    /* Aqui declado o objeto que vai receber o valor da  data selecionado , neste caso ira aparecer em um Campo de texto */
     JTextField caixa;
 
+    /**
+     * No construtor precisamos que seja enviado um Objetivo do Tipo TextFild que iremos atribuir o valor
+     * selecionado do Calendario 
+     *@param CaixaDeCombinacao Objetivo do tipo campo de texto que recebe no dia mes e ano selecionado no calendario   */
     public Calendario(JTextField CaixaDeCombinacao) {
+        /*Funcao responsavel da parte de Swing da nossa tela */
         initComponents();
+        /*Aqui estamos atribuindo na nossa variavel local o Campo de texto*/
         caixa = CaixaDeCombinacao;
+        /*setamos o modelo do nosso Jspinner atraves do metodo 'modelo' da nossa classe*/
         spAno.setModel(modelo());
+        /*setamos nosso Jlabel usando a Classe Calendar que nos retorna o mes atual*/
         Mes(data.get(Calendar.MONTH));
+        /** setamos o Jspinner com o ano atual utilizando c classe Calendar */
         spAno.setValue(data.get(Calendar.YEAR));
+        /*Esse metodo preenchemos as Label correspondendo a os dia da semana do mes que o Calendario se encontra  */
         PreencherDias();
 
     }
-
+/**
+ * Esse construtor usava para testes 
+ */
     private Calendario() {
+        initComponents();
+        spAno.setModel(modelo());
+        /*setamos nosso Jlabel usando a Classe Calendar que nos retorna o mes atual*/
+        Mes(data.get(Calendar.MONTH));
+        /** setamos o Jspinner com o ano atual utilizando c classe Calendar */
+        spAno.setValue(data.get(Calendar.YEAR));
+        /*Esse metodo preenchemos as Label correspondendo a os dia da semana do mes que o Calendario se encontra  */
+        PreencherDias();
     }
+    
+    /**
+     * Metodo que atribui nas Labels dia o numeral 0 a esqueda do numero para deixar com o Formato dd/mm/aaaa
+     */
     public void ArrumarDia(){
+        /* percorremos a lista de labels inteira */
         for (int i=0;i<ListaLb.size();i++){
+            /**
+             * Verificamos que a Label esta dentro dos valores de 1 a 9 
+             * se estiver acrescentemos o numeral 0 a esqueda 
+             * Se nao estiver passa para a proxima Label
+             */
             if(ListaLb.get(i).getText().equals("1") ||
                     ListaLb.get(i).getText().equals("2") ||
                     ListaLb.get(i).getText().equals("3") ||
@@ -66,6 +102,12 @@ public class Calendario extends javax.swing.JFrame {
         
         }
     }
+    
+    /**
+     * Metodo converte o Mes selecionado de texto para numero
+     * @param str Valor do mes selecionado 
+     * @return o mes selecionado em numeral 
+     */
     public String ConverterMes(String str){
             
         if (str.equals("Janeiro")) return "01";
@@ -780,16 +822,22 @@ public class Calendario extends javax.swing.JFrame {
 
 
     private void btRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRightActionPerformed
-
+        /** verifica se esta no ultimo mes do ano
+         caso for verdadeiro o mes recebe o valor -1 */
         if (Mes == 11) {
             Mes = -1;
         }
-
+        /*Passa para o proximo mes*/
         Mes++;
+        /*Metodo da classe atual que seta o mes*/
         Mes(Mes);
+        /* Metodo para Preencher as Label com os respectivos dias do mes */
         PreencherDias();
+        /**Verifica se o mes Atual corresponde a o primeiro mes do ano*/
         if (Mes == 0) {
+            /*declara variavel do tipo inteiro que recebe o valor do ano atual e adiciona mais um  */
             Integer ano = (Integer) spAno.getValue() + 1;
+            /*Seta o novo valor do ano no Objetivo Jspinner */
             spAno.setValue(ano);
         }
 
@@ -797,30 +845,44 @@ public class Calendario extends javax.swing.JFrame {
     }//GEN-LAST:event_btRightActionPerformed
 
     private void btLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLeftActionPerformed
+        /** verifica se esta no ultimo mes do ano
+         caso for verdadeiro o mes recebe o valor 12 */
         if (Mes == 0) {
             Mes = 12;
 
         }
-
+        /*Passa para o mes anterior */
         Mes--;
+        /*Metodo da classe atual que seta o mes*/
         Mes(Mes);
+        /* Metodo para Preencher as Label com os respectivos dias do mes */
         PreencherDias();
+        /**Verifica se o mes Atual corresponde a o ultimo mes do ano*/
         if (Mes == 11) {
+            /*declara variavel do tipo inteiro que recebe o valor do ano atual e subtrai  um  */
             Integer ano = (Integer) spAno.getValue() - 1;
+            /*Seta o novo valor do ano no Objetivo Jspinner */
             spAno.setValue(ano);
         }
     }//GEN-LAST:event_btLeftActionPerformed
 
     private void d1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_d1MouseClicked
-         if (ListaLb.get(0).getForeground().equals(Color.RED)) {
-            
+         /*Verifica se a Label selecionado se estar em vermelho */
+        if (ListaLb.get(0).getForeground().equals(Color.RED)) {
+            /**
+             * Metodo que acrescenta o valor 0 a esquerda dos numero no intervalo de 1 a 9*/
             ArrumarDia();
+            /*Setamos o campo de texto com o valor selecionado */
             caixa.setText(ListaLb.get(0).getText() + "/" + ConverterMes(lbMes.getText()) + "/" + spAno.getValue());
+            /*Deixa nossa tela invisivel */
             setVisible(false);
         } else {
+            /*Percorre todo a lista de Label*/
             for (JLabel lbs : ListaLb) {
+                /*Seta a cor de Todas a label para Preto */
                 lbs.setForeground(Color.BLACK);
             }
+            /*Seta a cor para vermelho para label atual */
             ListaLb.get(0).setForeground(Color.red);
         }
     }//GEN-LAST:event_d1MouseClicked
@@ -1326,15 +1388,11 @@ public class Calendario extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Calendario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Calendario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Calendario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Calendario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */
@@ -1344,10 +1402,12 @@ public class Calendario extends javax.swing.JFrame {
             }
         });
     }
-
+    /**
+     * Metodo para setar a Label Mes com o valor de entrada
+     * @param resp Valor Inteiro correspondendo o mes do ano 
+     */
     public void Mes(int resp) {
 
-        int mes = data.get(Calendar.MONTH);
         switch (resp) {
             case 0:
                 lbMes.setText("Janeiro");
@@ -1387,21 +1447,39 @@ public class Calendario extends javax.swing.JFrame {
                 break;
         }
     }
-
+    /**
+     * Metodo que retorna um modelo do Jspinner referente a os Anos
+     * @return Retorna um Modelo de Jspinner 
+     */
     public SpinnerListModel modelo() {
+        /*Declaracao de Modelo do Objetivo Jspinner */
         SpinnerListModel model = new SpinnerListModel();
+        /*Declaracao de uma lista*/
         ArrayList lista = new ArrayList();
+        /*Laco de repeticao que inicia no ano de 2000 e finaliza em 2051*/
         for (int i = 2000; i < 2051; i++) {
+            /*Atribui o valor da Variavel i para lista */
             lista.add(i);
         }
+        /* Seta a lista do Objeto de modelo do Jspinner referente a os anos */
         model.setList(lista);
-
+        /*retorna o modelo criado */
         return model;
     }
-
+    /**
+     * Metodo que seta os componente da tela com os valores dos dias mes e ano 
+     */
     public void PreencherDias() {
+        /*Verifica se o ano atual e bisexto ou nao */
         boolean anoBisexto = AnoBisexto();
-
+        
+        
+        /**
+         * Aqui atribuimos todos as Label da tela para a lista
+         * Essa parte do codigo precisa melhorar , uma forma melhor de fazer isso
+         * seria criar um metodo que cria todos as label ja colocando na tela e preenchendo na lista utilizando um laco de repeticao
+         * a tela foi feita antes , por esse motivo adicionamos manualmente 
+        */
         ListaLb.add(d1);
         ListaLb.add(d2);
         ListaLb.add(d3);
@@ -1444,19 +1522,24 @@ public class Calendario extends javax.swing.JFrame {
         ListaLb.add(d40);
         ListaLb.add(d41);
         ListaLb.add(d42);
-        ///////////////////////////////////////////////////////////////
+        /*Nesse laco estamos inicializando todas as Labels como vazio */
         for (int i = 0; i < 42; i++) {
             ListaLb.get(i).setText("");
         }
-
-        int diadasemana = DiaDaSemana((int) spAno.getValue(), Mes, 1);
-        diadasemana--;
+        /* Variavel local recebe o valor qual dia semana comeca o mes/ano da entrada*/ 
+        int diadasemana = DiaDaSemana((int) spAno.getValue(), Mes, 0);
+        /*Declaracao do iterador*/
         int j = 1;
+        /**
+         * Laco que verifica qual mes que a tela se encontra e preenche os dias equivalente a o mes correspondente 
+         */
         switch (Mes) {
             case 0:
+                /* Laco de repeticao que iniciado com o valor do dia da semana e vai ate o total de quantidade de dias do mes */
                 for (int i = diadasemana; i < janeiro + diadasemana; i++) {
-
+                    /*Setar o valor da labels comecando pelo primeiro dia da semana correspondente ao mes/ano */
                     ListaLb.get(i).setText(String.valueOf(j));
+                    /*Variavel recebe mais um*/
                     j++;
                 }
                 break;
@@ -1536,10 +1619,14 @@ public class Calendario extends javax.swing.JFrame {
         
 
     }
-
+    /**
+     * Metodo que verifica se o ano e bisexto 
+     * @return retorna verdadeiro caso o ano seja bisexto , retorna falso caso nao seja bisexto
+     */
     public boolean AnoBisexto() {
+        /*Variavel inteiro recebe o valor do Objeto Jspinner referente ao ano da tela*/ 
         Integer ano = (Integer) spAno.getValue();
-
+        
         Integer resp = (ano + 4) % 4;
 
         if (ano % 4 == 0) {
@@ -1551,35 +1638,56 @@ public class Calendario extends javax.swing.JFrame {
         }
 
     }
-
+    
+    
+    
+    /**
+     * Metodo que verifica qual dia da semana comeca referente ao mes e ano da tela
+     * @param ano Valor do Ano da tela
+     * @param mes Valor do mes da tela
+     * @param dia Valor do dia da tela
+     * @return Retorna qual dia da semana comeca referente a data de entrada 
+     */
     public int DiaDaSemana(int ano, int mes, int dia) {
+        /*Seta com os parametros de entrada o Calendar */
         data.set(ano, mes, dia);
+        /*Variavel de inteiro que vai receber o valor referente ao dia da semana que o mes/ano comeca*/
         int diaDaSemana = 0;
-
+        /*Variavel de inteiro que recebe os valores dos dias da semana */
         int semana = data.get(Calendar.DAY_OF_WEEK);
-        if (semana == Calendar.SUNDAY) {
-            // domingo
-            diaDaSemana = 1;
-        } else if (semana == Calendar.MONDAY) {
-            //segunda
-            diaDaSemana = 2;
-        } else if (semana == Calendar.TUESDAY) {
-            //terca
-            diaDaSemana = 3;
-        } else if (semana == Calendar.WEDNESDAY) {
-            //quarta
-            diaDaSemana = 4;
-        } else if (semana == Calendar.THURSDAY) {
-            //quinta
-            diaDaSemana = 5;
-        } else if (semana == Calendar.FRIDAY) {
-            //sexta
-            diaDaSemana = 6;
-        } else if (semana == Calendar.SATURDAY) {
-            //sabado
-            diaDaSemana = 7;
+        switch (semana) {
+            case Calendar.SUNDAY:
+                // domingo
+                diaDaSemana = 1;
+                break;
+            case Calendar.MONDAY:
+                //segunda
+                diaDaSemana = 2;
+                break;
+            case Calendar.TUESDAY:
+                //terca
+                diaDaSemana = 3;
+                break;
+            case Calendar.WEDNESDAY:
+                //quarta
+                diaDaSemana = 4;
+                break;
+            case Calendar.THURSDAY:
+                //quinta
+                diaDaSemana = 5;
+                break;
+            case Calendar.FRIDAY:
+                //sexta
+                diaDaSemana = 6;
+                break;
+            case Calendar.SATURDAY:
+                //sabado
+                diaDaSemana = 7;
+                break;
+            default:
+                break;
         }
-
+        
         return diaDaSemana;
 
     }
