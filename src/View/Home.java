@@ -350,6 +350,9 @@ public class Home extends javax.swing.JFrame {
         tfCPF.setText("");
         tfContatoCondutor.setText("");
         taDescricao.setText("");
+        tfIsca.setText("");
+        tfVarredura.setText("");
+        tfReside.setText("");
     }
 
     public void LimparCadastroCliente() {
@@ -1791,7 +1794,7 @@ public class Home extends javax.swing.JFrame {
         ));
         jScrollPane4.setViewportView(tbConsultarSinistro);
 
-        jButton8.setText("jButton1");
+        jButton8.setText("Gerar Relatorio");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
@@ -1803,7 +1806,7 @@ public class Home extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(755, Short.MAX_VALUE)
+                .addContainerGap(721, Short.MAX_VALUE)
                 .addComponent(jButton8)
                 .addGap(20, 20, 20))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2497,10 +2500,11 @@ public class Home extends javax.swing.JFrame {
                             }
             
                     }
+                        LimparSinistro();
     }//GEN-LAST:event_btSalvarSinistroActionPerformed
 
     private void btLimparSinistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimparSinistroActionPerformed
-        //    LimparSinistro();
+            LimparSinistro();
     }//GEN-LAST:event_btLimparSinistroActionPerformed
 
     private void tfHoraChegadaAgenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfHoraChegadaAgenteActionPerformed

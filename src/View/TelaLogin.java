@@ -5,6 +5,7 @@
  */
 package View;
 
+import DAO.UsuarioDAO;
 import Model.Isca;
 import Model.Usuario;
 import java.awt.Image;
@@ -12,6 +13,9 @@ import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -21,13 +25,13 @@ import javax.swing.JOptionPane;
  */
 public class TelaLogin extends javax.swing.JFrame implements KeyEventDispatcher {
 
-    /**
-     * Creates new form TelaLogin
-     */
+    HashMap login = new HashMap();
+    
     public TelaLogin() {
         initComponents();
         Redimencionamento();
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(this);
+        pegarLogin();
     }
     
     public void Redimencionamento(){
@@ -38,32 +42,25 @@ public class TelaLogin extends javax.swing.JFrame implements KeyEventDispatcher 
         
     }
     public void logar(){
-        Usuario login = new Usuario();
-            Usuario resp=null;
-          
-            resp = login.pesquisar(tfLogin.getText());
-           
-              
-            try{
-                
-             if (resp.getSenha().equals(tfSenha.getText())){
-             Home home = new Home(tfLogin.getText());
-                 setVisible(false);
-             home.setVisible(true);
-             KeyboardFocusManager.getCurrentKeyboardFocusManager().removeKeyEventDispatcher(this);
+            String senha = (String) login.get(tfLogin.getText());
+            if (senha.equals(tfSenha.getText())){
+                Home tela = new Home(tfLogin.getText());
+                setVisible(false);
+                tela.setVisible(true);
             }else{
-                
-                JOptionPane.showMessageDialog(null,"Usuario ou Senha invalido !");
-            }
-            }catch(NullPointerException e){
-                JOptionPane.showMessageDialog(null,"Usuario ou Senha invalido !");
+                JOptionPane.showMessageDialog(null, "Usuario ou Senha Invalido !");
             }
             
             
        tfSenha.setText("");
     }
             
-    
+    public void pegarLogin(){
+        UsuarioDAO dao = new UsuarioDAO();
+        login =dao.readAll();
+        String senha = (String) login.get("adm");
+        System.out.println("A senha do hashmap  teste :"+senha);
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.

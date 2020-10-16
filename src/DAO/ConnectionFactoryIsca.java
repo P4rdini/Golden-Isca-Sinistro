@@ -17,7 +17,7 @@ import java.sql.SQLException;
  */
 public class ConnectionFactoryIsca {
     // url do banco de dados na maquina local
- //   private static final String url ="jdbc:sqlite:Z://06. PASTA INDIVIDUAIS//Pardini//BD//isca.db";
+  //  private static final String url ="jdbc:sqlite:Z://06. PASTA INDIVIDUAIS//Pardini//BD//isca.db";
     
                         // teste maquina vitural   
 //    private static final String url ="jdbc:sqlite:C:\\Documents and Settings\\Administrator\\My Documents\\bd\\Isca.db";

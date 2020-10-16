@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -90,5 +91,32 @@ public class UsuarioDAO {
             ConnectionFactoryIsca.closeConnection(con, pst, rs);
         }
         return true;
+    }
+    public HashMap readAll(){
+         Connection con = ConnectionFactoryIsca.getConnection();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        String sql = "SELECT * FROM LOGIN";
+            HashMap chaveValor = new HashMap();
+        
+        try {
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            while(rs.next()){
+                
+            String rsLogin = rs.getString("login");
+            String rsSenha = rs.getString("senha");
+            
+            chaveValor.put(rsLogin, rsSenha);
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("Nao temos registro desse login");
+            return null;
+        } finally {
+            ConnectionFactoryIsca.closeConnection(con, pst, rs);
+
+        }
+     return chaveValor;
     }
 }
