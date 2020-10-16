@@ -45,6 +45,7 @@ public class TelaLogin extends javax.swing.JFrame implements KeyEventDispatcher 
             String senha = (String) login.get(tfLogin.getText());
             if (senha.equals(tfSenha.getText())){
                 Home tela = new Home(tfLogin.getText());
+                KeyboardFocusManager.getCurrentKeyboardFocusManager().removeKeyEventDispatcher(this);
                 setVisible(false);
                 tela.setVisible(true);
             }else{

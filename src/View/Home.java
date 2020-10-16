@@ -12,6 +12,7 @@ import Model.Isca;
 import Model.Sinistro;
 import Model.Usuario;
 import Util.Calendario;
+import Util.Mascara;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Image;
@@ -31,6 +32,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -46,6 +48,7 @@ public class Home extends javax.swing.JFrame {
         initComponents();
         ckBox.setSelected(true);
         Redimencionamento();
+        camposFormatados();
         ClienteDAO dao = new ClienteDAO();
 
         //   tfData.setFormatterFactory(Util.Mascara.getData());
@@ -183,7 +186,19 @@ public class Home extends javax.swing.JFrame {
     private Home() {
 
     }
-
+    public void camposFormatados(){
+        Mascara.getTelefone().install(tfContato);
+        Mascara.getHora().install(tfHoraOcorrencia);
+        Mascara.getPlaca().install(tfPlaca);
+        Mascara.getPlaca().install(tfCarreta);
+        Mascara.getcpf().install(tfCPF);
+        Mascara.getTelefone().install(tfContatoCondutor);
+        Mascara.getPlaca().install(tfPlacaAgente);
+        Mascara.getHora().install(tfHoraAcionamento);
+        Mascara.getHora().install(tfHoraChegadaAgente);
+        Mascara.getHora().install(tfHoraTermino);
+    }
+    
     public void Redimencionamento() {
         ImageIcon imagem = new ImageIcon(getClass().getResource("/Resources/LogoEscudo.png"));
         Image img = imagem.getImage().getScaledInstance(lbLogo.getWidth(), lbLogo.getHeight(), 1);
@@ -457,9 +472,7 @@ public class Home extends javax.swing.JFrame {
         cbTipoOcorrencia = new javax.swing.JComboBox<>();
         pnVeiculo = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        tfPlaca = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        tfCarreta = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         tfModelo = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
@@ -472,12 +485,12 @@ public class Home extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
         jLabel54 = new javax.swing.JLabel();
         tfIsca = new javax.swing.JTextField();
+        tfPlaca = new javax.swing.JFormattedTextField();
+        tfCarreta = new javax.swing.JFormattedTextField();
         jLabel9 = new javax.swing.JLabel();
         tfInformante = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        tfHoraOcorrencia = new javax.swing.JTextField();
-        tfContato = new javax.swing.JTextField();
         btSalvarSinistro = new javax.swing.JButton();
         btLimparSinistro = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -486,17 +499,13 @@ public class Home extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         tfNome = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
-        tfCPF = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
-        tfContatoCondutor = new javax.swing.JTextField();
+        tfCPF = new javax.swing.JFormattedTextField();
+        tfContatoCondutor = new javax.swing.JFormattedTextField();
         pnAcionamento = new javax.swing.JPanel();
-        tfHoraTermino = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        tfHoraChegadaAgente = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        tfHoraAcionamento = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        tfPlacaAgente = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         tfNomeAgente = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -508,6 +517,12 @@ public class Home extends javax.swing.JFrame {
         tfVarredura = new javax.swing.JTextField();
         lbReside = new javax.swing.JLabel();
         tfReside = new javax.swing.JTextField();
+        tfPlacaAgente = new javax.swing.JFormattedTextField();
+        tfHoraAcionamento = new javax.swing.JFormattedTextField();
+        tfHoraChegadaAgente = new javax.swing.JFormattedTextField();
+        tfHoraTermino = new javax.swing.JFormattedTextField();
+        tfContato = new javax.swing.JFormattedTextField();
+        tfHoraOcorrencia = new javax.swing.JFormattedTextField();
         pnCadastroIsca = new javax.swing.JPanel();
         pnPrincipalCadastroIsca = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
@@ -1139,21 +1154,19 @@ public class Home extends javax.swing.JFrame {
         pnOcorrencia.add(cbClienteSinistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 130, -1));
 
         jLabel5.setText("Tipo de Ocorrencia ");
-        pnOcorrencia.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, -1, -1));
+        pnOcorrencia.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
 
         cbTipoOcorrencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Suspeita de Sinistro", "Sinistro Confirmado", "Preservacao" }));
-        pnOcorrencia.add(cbTipoOcorrencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 130, -1));
+        pnOcorrencia.add(cbTipoOcorrencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, 130, -1));
 
         pnVeiculo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados do Veiculo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
         pnVeiculo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel13.setText("Placa :");
         pnVeiculo.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
-        pnVeiculo.add(tfPlaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 80, -1));
 
         jLabel14.setText("Carreta:");
         pnVeiculo.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
-        pnVeiculo.add(tfCarreta, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 80, -1));
 
         jLabel16.setText("Modelo:");
         pnVeiculo.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
@@ -1178,24 +1191,22 @@ public class Home extends javax.swing.JFrame {
         jLabel54.setText("Isca:");
         pnVeiculo.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, -1, -1));
         pnVeiculo.add(tfIsca, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 50, 100, -1));
+        pnVeiculo.add(tfPlaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 80, 24));
+        pnVeiculo.add(tfCarreta, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 80, 24));
 
         pnOcorrencia.add(pnVeiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 820, 90));
 
         jLabel9.setText("Informante:");
-        pnOcorrencia.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, -1, -1));
+        pnOcorrencia.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 43, -1, -1));
 
         tfInformante.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        pnOcorrencia.add(tfInformante, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, 74, 24));
+        pnOcorrencia.add(tfInformante, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, 74, 24));
 
-        jLabel15.setText("Contato");
-        pnOcorrencia.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 40, -1, -1));
+        jLabel15.setText("Contato:");
+        pnOcorrencia.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 43, -1, -1));
 
-        jLabel17.setText("Hora da ocorrencia");
-        pnOcorrencia.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 40, -1, -1));
-
-        tfHoraOcorrencia.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        pnOcorrencia.add(tfHoraOcorrencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 40, 74, 23));
-        pnOcorrencia.add(tfContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, 100, 23));
+        jLabel17.setText("Hora da ocorrencia:");
+        pnOcorrencia.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 40, -1, -1));
 
         btSalvarSinistro.setText("Salvar");
         btSalvarSinistro.addActionListener(new java.awt.event.ActionListener() {
@@ -1218,7 +1229,7 @@ public class Home extends javax.swing.JFrame {
         taDescricao.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Descricao", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
         jScrollPane3.setViewportView(taDescricao);
 
-        pnOcorrencia.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, 590, 150));
+        pnOcorrencia.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 370, 580, 130));
 
         pnCondutor.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados Condutor", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
@@ -1233,19 +1244,19 @@ public class Home extends javax.swing.JFrame {
         pnCondutorLayout.setHorizontalGroup(
             pnCondutorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnCondutorLayout.createSequentialGroup()
-                .addContainerGap(203, Short.MAX_VALUE)
+                .addContainerGap(191, Short.MAX_VALUE)
                 .addComponent(jLabel19)
-                .addGap(19, 19, 19)
+                .addGap(4, 4, 4)
                 .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(39, 39, 39)
                 .addComponent(jLabel21)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(4, 4, 4)
+                .addComponent(tfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
                 .addComponent(jLabel22)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(4, 4, 4)
                 .addComponent(tfContatoCondutor, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(186, 186, 186))
+                .addGap(170, 170, 170))
         );
         pnCondutorLayout.setVerticalGroup(
             pnCondutorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1253,51 +1264,35 @@ public class Home extends javax.swing.JFrame {
                 .addGroup(pnCondutorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnCondutorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel22)
-                        .addComponent(tfContatoCondutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tfContatoCondutor, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnCondutorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel19)
                         .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel21)
-                        .addComponent(tfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(tfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        pnOcorrencia.add(pnCondutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 810, -1));
+        pnOcorrencia.add(pnCondutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 810, 70));
 
         pnAcionamento.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados do Acionamento", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
         pnAcionamento.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        pnAcionamento.add(tfHoraTermino, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 60, 116, -1));
 
-        jLabel12.setText("Hora do termino");
-        pnAcionamento.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 60, -1, -1));
-
-        tfHoraChegadaAgente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfHoraChegadaAgenteActionPerformed(evt);
-            }
-        });
-        pnAcionamento.add(tfHoraChegadaAgente, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 20, 80, -1));
+        jLabel12.setText("Hora do termino:");
+        pnAcionamento.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 64, -1, -1));
 
         jLabel11.setText("Hora de chegada:");
-        pnAcionamento.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 20, -1, -1));
-        pnAcionamento.add(tfHoraAcionamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 80, -1));
+        pnAcionamento.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(644, 24, -1, -1));
 
         jLabel10.setText("Hora Inicio:");
-        pnAcionamento.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 20, -1, -1));
-
-        tfPlacaAgente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfPlacaAgenteActionPerformed(evt);
-            }
-        });
-        pnAcionamento.add(tfPlacaAgente, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 90, -1));
+        pnAcionamento.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 24, -1, -1));
 
         jLabel8.setText("Placa:");
-        pnAcionamento.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, -1, -1));
+        pnAcionamento.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 64, -1, -1));
         pnAcionamento.add(tfNomeAgente, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 90, -1));
 
         jLabel7.setText("Agente:");
-        pnAcionamento.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, -1, -1));
+        pnAcionamento.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 24, -1, -1));
 
         cbTipoAcionamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Antenista", "Pronta-Resposta", "Escolta" }));
         cbTipoAcionamento.addItemListener(new java.awt.event.ItemListener() {
@@ -1311,26 +1306,32 @@ public class Home extends javax.swing.JFrame {
         pnAcionamento.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
 
         jLabel55.setText("Total Km:");
-        pnAcionamento.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, -1, -1));
+        pnAcionamento.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 104, -1, -1));
         pnAcionamento.add(tfTotalKM, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 90, -1));
 
         jLabel56.setText("Varredura:");
-        pnAcionamento.add(jLabel56, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 60, -1, -1));
-        pnAcionamento.add(tfVarredura, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 60, 210, -1));
+        pnAcionamento.add(jLabel56, new org.netbeans.lib.awtextra.AbsoluteConstraints(294, 64, -1, -1));
+        pnAcionamento.add(tfVarredura, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 280, -1));
 
         lbReside.setText("Reside:");
-        pnAcionamento.add(lbReside, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, -1, -1));
-        pnAcionamento.add(tfReside, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 110, -1));
+        pnAcionamento.add(lbReside, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 24, -1, -1));
+        pnAcionamento.add(tfReside, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 160, -1));
+        pnAcionamento.add(tfPlacaAgente, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 90, 23));
+        pnAcionamento.add(tfHoraAcionamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 20, 60, 23));
+        pnAcionamento.add(tfHoraChegadaAgente, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 20, 60, 23));
+        pnAcionamento.add(tfHoraTermino, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 60, 60, 23));
 
-        pnOcorrencia.add(pnAcionamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 810, 140));
+        pnOcorrencia.add(pnAcionamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 810, 140));
+        pnOcorrencia.add(tfContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 40, 105, 25));
+        pnOcorrencia.add(tfHoraOcorrencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 40, 60, 23));
 
         javax.swing.GroupLayout pnCadastroSinistroLayout = new javax.swing.GroupLayout(pnCadastroSinistro);
         pnCadastroSinistro.setLayout(pnCadastroSinistroLayout);
         pnCadastroSinistroLayout.setHorizontalGroup(
             pnCadastroSinistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnCadastroSinistroLayout.createSequentialGroup()
-                .addComponent(pnOcorrencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 30, Short.MAX_VALUE))
+                .addComponent(pnOcorrencia, javax.swing.GroupLayout.DEFAULT_SIZE, 848, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnCadastroSinistroLayout.setVerticalGroup(
             pnCadastroSinistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2513,10 +2514,6 @@ public class Home extends javax.swing.JFrame {
             LimparSinistro();
     }//GEN-LAST:event_btLimparSinistroActionPerformed
 
-    private void tfHoraChegadaAgenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfHoraChegadaAgenteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfHoraChegadaAgenteActionPerformed
-
     private void cbTipoAcionamentoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbTipoAcionamentoItemStateChanged
         if(cbTipoAcionamento.getSelectedIndex() ==1){
             //                 pnAcionamento.removeAll();
@@ -2589,10 +2586,6 @@ public class Home extends javax.swing.JFrame {
     private void jButton7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseEntered
         fecharSinistro.stop();      
     }//GEN-LAST:event_jButton7MouseEntered
-
-    private void tfPlacaAgenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPlacaAgenteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfPlacaAgenteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2806,7 +2799,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JTextArea taID;
     private javax.swing.JTextArea taNumeroIsca;
     private javax.swing.JTable tbConsultarSinistro;
-    private javax.swing.JTextField tfCPF;
+    private javax.swing.JFormattedTextField tfCPF;
     private javax.swing.JTextField tfCadastroClienteBairro;
     private javax.swing.JTextField tfCadastroClienteCep;
     private javax.swing.JTextField tfCadastroClienteCidade;
@@ -2816,18 +2809,18 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JTextField tfCadastroClienteEndereco;
     private javax.swing.JTextField tfCadastroClienteNome;
     private javax.swing.JTextField tfCalendario;
-    private javax.swing.JTextField tfCarreta;
+    private javax.swing.JFormattedTextField tfCarreta;
     private javax.swing.JTextField tfCidade;
     private javax.swing.JTextField tfConfirmacao;
     private javax.swing.JTextField tfConsultaAlterarCalendario;
-    private javax.swing.JTextField tfContato;
-    private javax.swing.JTextField tfContatoCondutor;
+    private javax.swing.JFormattedTextField tfContato;
+    private javax.swing.JFormattedTextField tfContatoCondutor;
     private javax.swing.JTextField tfCoordenadas;
     private javax.swing.JTextField tfCor;
-    private javax.swing.JTextField tfHoraAcionamento;
-    private javax.swing.JTextField tfHoraChegadaAgente;
-    private javax.swing.JTextField tfHoraOcorrencia;
-    private javax.swing.JTextField tfHoraTermino;
+    private javax.swing.JFormattedTextField tfHoraAcionamento;
+    private javax.swing.JFormattedTextField tfHoraChegadaAgente;
+    private javax.swing.JFormattedTextField tfHoraOcorrencia;
+    private javax.swing.JFormattedTextField tfHoraTermino;
     private javax.swing.JTextField tfICCIDConsultaAlterar;
     private javax.swing.JTextField tfInformante;
     private javax.swing.JTextField tfIsca;
@@ -2835,8 +2828,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JTextField tfNome;
     private javax.swing.JTextField tfNomeAgente;
     private javax.swing.JTextField tfPesquisa;
-    private javax.swing.JTextField tfPlaca;
-    private javax.swing.JTextField tfPlacaAgente;
+    private javax.swing.JFormattedTextField tfPlaca;
+    private javax.swing.JFormattedTextField tfPlacaAgente;
     private javax.swing.JTextField tfReside;
     private javax.swing.JTextField tfSenha;
     private javax.swing.JTextField tfTotalKM;

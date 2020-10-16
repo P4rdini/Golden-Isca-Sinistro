@@ -6,6 +6,9 @@
 package Util;
 
 import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFormattedTextField;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 
@@ -24,6 +27,45 @@ public class Mascara {
             return null;
         }
         return (new DefaultFormatterFactory(mask, mask));
+    }
+    public static MaskFormatter getTelefone(){
+        MaskFormatter mask=null;
+        try{
+            mask = new MaskFormatter("(##)#.####-####");
+            mask.setValidCharacters("0123456789");
+           
+        } catch (ParseException ex) {
+            Logger.getLogger(Mascara.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return mask;
+    }
+    public static MaskFormatter getHora(){
+        MaskFormatter mask = null;
+        try {
+             mask = new MaskFormatter("##:##");
+             mask.setValidCharacters("0123456789");
+        } catch (ParseException ex) {
+            Logger.getLogger(Mascara.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return mask;
+    }
+    public static MaskFormatter getPlaca(){
+        MaskFormatter mask =null;
+        try {
+            mask = new MaskFormatter("UUU-#*##");
+        } catch (ParseException ex) {
+            Logger.getLogger(Mascara.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return mask;
+    }
+    public static MaskFormatter getcpf(){
+        MaskFormatter mask =null;
+        try {
+            mask = new MaskFormatter("###.###.###-##");
+        } catch (ParseException ex) {
+            Logger.getLogger(Mascara.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return mask;
     }
     
 }
