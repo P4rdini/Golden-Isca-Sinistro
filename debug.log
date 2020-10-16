@@ -778,3 +778,7 @@
 [0927/153520.622:ERROR:crash_report_database_win.cc(469)] failed to stat report
 [0927/153604.272:ERROR:crash_report_database_win.cc(469)] failed to stat report
 [0927/153621.123:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[1016/150449.084:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1016/151449.085:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1016/151449.085:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\rafa_\AppData\Local\Google\Chrome\User Data\Crashpad\reports\54c58477-55ad-4a9f-9ff4-2a19b960a2ab.dmp: O sistema não pode encontrar o arquivo especificado. (0x2)
+[1016/151449.085:ERROR:directory_reader_win.cc(43)] FindFirstFile: O sistema não pode encontrar o caminho especificado. (0x3)

@@ -2209,7 +2209,13 @@ public class Home extends javax.swing.JFrame {
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
       //  MostrarCliente();
-        Object obj = Tabela.getValueAt(Tabela.getSelectedRow(), 1);
+      Object obj ;
+        if(cbFiltro.getSelectedIndex() == 0){
+            obj = Tabela.getValueAt(Tabela.getSelectedRow(), 0);
+        }else{
+            
+         obj = Tabela.getValueAt(Tabela.getSelectedRow(), 1);
+        }
         Isca isca = new Isca();
         List<Isca> lista = new ArrayList<Isca>();
         lista = isca.pegarValores((String) obj);
@@ -2236,7 +2242,7 @@ public class Home extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Isca isca = new Isca();
-        Object id = Tabela.getValueAt(Tabela.getSelectedRow(), 1);
+        Object id = Tabela.getValueAt(Tabela.getSelectedRow(), 0);
         if (isca.Desativar(Integer.valueOf(id.toString()))) {
         ModeloTabela(cbFiltro.getSelectedItem().toString(),tfPesquisa.getText());
             JOptionPane.showMessageDialog(null, "Isca " + id + " Desativada com sucesso");

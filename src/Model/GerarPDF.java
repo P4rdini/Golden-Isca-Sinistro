@@ -21,11 +21,8 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -648,9 +645,6 @@ public class GerarPDF {
             documento.close();
         }
     }
-    public static void main(String[] args) {
-        List<Missao> a = new ArrayList<Missao>();
-        GerarPDF pdf = new GerarPDF();
-    }
+   
 
 }
